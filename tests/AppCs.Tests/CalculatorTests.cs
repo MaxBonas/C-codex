@@ -48,4 +48,43 @@ public class CalculatorTests
     {
         Assert.Throws<DivideByZeroException>(() => _calculator.Divide(1, 0));
     }
+
+    [Theory]
+    [InlineData(2, 0, 1)]
+    [InlineData(2, 3, 8)]
+    [InlineData(-2, 2, 4)]
+    public void Power_ReturnsPower(int baseValue, int exponent, int expected)
+    {
+        Assert.Equal(expected, _calculator.Power(baseValue, exponent));
+    }
+
+    [Fact]
+    public void Power_NegativeExponent_Throws()
+    {
+        Assert.Throws<ArgumentException>(() => _calculator.Power(2, -1));
+    }
+
+    [Theory]
+    [InlineData(0, 1)]
+    [InlineData(1, 1)]
+    [InlineData(5, 120)]
+    public void Factorial_ReturnsFactorial(int n, int expected)
+    {
+        Assert.Equal(expected, _calculator.Factorial(n));
+    }
+
+    [Fact]
+    public void Factorial_Negative_Throws()
+    {
+        Assert.Throws<ArgumentException>(() => _calculator.Factorial(-1));
+    }
+
+    [Theory]
+    [InlineData(54, 24, 6)]
+    [InlineData(5, 0, 5)]
+    [InlineData(-5, -10, 5)]
+    public void Gcd_ReturnsGreatestCommonDivisor(int a, int b, int expected)
+    {
+        Assert.Equal(expected, _calculator.Gcd(a, b));
+    }
 }
